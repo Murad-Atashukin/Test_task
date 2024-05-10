@@ -172,3 +172,24 @@ class TestHomePage:
         profile_page = ProfilePage()
         assert profile_page.state.is_displayed() != True, "Profile page should not open, you entered false password"
         Logger.info("Test case 'test_login_user_with_false_password' completed successfully")
+
+    @pytest.mark.xfail
+    def test_login_user_without_credentials(self):
+        Logger.info("Test case 'test_login_user_without_credentials' launched")
+        Logger.info("Go to home page")
+        home_page = HomePage()
+        assert home_page.state.is_displayed(), "Home page is not open"
+
+        Logger.info("Go to login page")
+        pages_menu = PagesMenu()
+        pages_menu.go_to_login_page()
+        login_page = LoginPage()
+        assert login_page.state.is_displayed(), "Login page is not open."
+
+        Logger.info("Login user without credentials")
+
+        Logger.info("Go to profile page")
+        login_page.click_button_login()
+        profile_page = ProfilePage()
+        assert profile_page.state.is_displayed() != True, "Profile page should not open, you didnt entered credentials"
+        Logger.info("Test case 'test_login_user_without_credentials' completed successfully")
